@@ -21,7 +21,7 @@ const router = createBrowserRouter([
                 element:<HomePage/>,
             },
             {
-                path:'/conversation/:id',
+                path:'/conversation',
                 element:<ConversationPage/>
             },
         ]

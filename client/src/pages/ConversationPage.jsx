@@ -1,9 +1,10 @@
-import React from 'react';
+import MessageList from "../components/message/MessageList.jsx";
 
 const ConversationPage = () => {
     return (
-        <div>
-            
+        <div className='p-20'>
+            <MessageList/>
+
         </div>
     );
 };

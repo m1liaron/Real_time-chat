@@ -1,5 +1,6 @@
 import React from 'react';
 import Conversations from "./Conversations.jsx";
+import Message from "../message/Message.jsx";
 
 const Sidebar = () => {
     return (
