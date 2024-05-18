@@ -1,11 +1,10 @@
 const express = require('express');
-const protectRoute = require('../middleware/protectRoute')
 const router = express.Router();
+const authorization = require('../middleware/authentication');
 
-const requireToken = require('../middleware/requireToken');
 const {sendMessage, getMessages} = require('../controllers/message');
 
-router.get('/:id', protectRoute, getMessages)
-router.post('/send/:id', protectRoute, sendMessage)
+router.get('/:id', authorization, getMessages)
+router.post('/send/:id', authorization, sendMessage)
 
 module.exports = router;

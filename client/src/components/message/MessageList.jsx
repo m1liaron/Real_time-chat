@@ -1,8 +1,12 @@
-import React from 'react';
 import Message from "./Message.jsx";
 import MessageInput from "./MessageInput.jsx";
+import useGetMessages from "../../hooks/useGetMessages.js";
 
-const MessageList = () => {
+const MessageList = ({id}) => {
+    const {data, loading, error} = useGetMessages(id)
+
+    // console.log(data)
+
     return (
         <div>
             <Message/>

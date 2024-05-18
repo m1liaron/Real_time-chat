@@ -3,19 +3,19 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+// routes import
+const authRouter = require('./routes/authRouter');
+const messageRouter = require('./routes/messageRouter');
+const userRouter = require('./routes/userRoutes');
 
+const connectDB = require('./db/connect')
 const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cookieParser())
 app.use(cors());
 
-const connectDB = require('./db/connect')
-
 // Routes
-const authRouter = require('./routes/authRouter');
-const messageRouter = require('./routes/messageRouter');
-const userRouter = require('./routes/userRoutes');
 app.use('/api/auth', authRouter)
 app.use('/api/messages', messageRouter)
 app.use('/api/users', userRouter)

@@ -1,7 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 const bcrypt = require('bcrypt');
 const User = require('../models/User');
-const generateToken = require('../utils/generateToken')
 
 const register = async (req, res) => {
     try{
@@ -13,10 +12,18 @@ const register = async (req, res) => {
         }
 
         const boyProfilePic = `https://avatar.iran.liara.run/public/boy?username=${username}`
-        const user = await User.create({...req.body, ...boyProfilePic});
-        await generateToken(user._id, res)
 
-        res.status(StatusCodes.CREATED).json({user: {name: user.name, profile_picture: user.profile_picture}});
+        const userData = {
+            ...req.body,
+            profile_picture:boyProfilePic // Include boyProfilePic in userData
+        };
+
+        console.log(userData)
+
+        const user = await User.create(userData);
+        const token = user.createJWT();
+
+        res.status(StatusCodes.CREATED).json({user: {name: user.name, profile_picture: user.profile_picture}, token});
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error:'Register failed. Please try again'});
@@ -40,22 +47,24 @@ const login = async (req, res) => {
             return res.status(StatusCodes.UNAUTHORIZED).json({ error: 'Invalid credentials' });
         }
 
-        await generateToken(user._id, res)
+        const token = user.createJWT();
         const {name, username, profile_picture} = user
-        res.status(StatusCodes.CREATED).json({user:{name,username, email: user.email, profile_picture}});
+        res.status(StatusCodes.CREATED).json({user:{name,username, email: user.email, profile_picture}, token});
     } catch(error){
         console.error('Error logging in user:', error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Login failed. Please try again later.' });
     }
 }
 
-const getUser = (req, res) => {
+const getUser = async (req, res) => {
     try{
-        const user = User.findOne({_id: req.user.userId});
+        const user = await User.findOne({ _id:req.user.userId });
 
         if(!user){
             throw new Error('User not found');
         }
+
+        const {name, email, profile_picture} = user
 
         res.status(200).json({user: {name, email, profile_picture}});
     } catch(error){

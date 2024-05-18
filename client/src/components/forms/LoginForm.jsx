@@ -1,12 +1,14 @@
 import axios from "axios";
 import {useState} from "react";
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 
 const LoginForm = () => {
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigation = useNavigate()
 
     const onLogin = (e) => {
         e.preventDefault()
@@ -18,7 +20,8 @@ const LoginForm = () => {
             password
         }
         axios.post('http://localhost:3000/api/auth/login', data).then(response => {
-            localStorage.setItem("chat-user", response.data)
+            localStorage.setItem("token", response.data.token)
+            navigation('/')
             console.log(response);
         }).catch((error) => {
             console.log(error);

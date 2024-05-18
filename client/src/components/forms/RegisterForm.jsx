@@ -19,7 +19,7 @@ const RegisterForm = () => {
         }
         axios.post('http://localhost:3000/api/auth/register', data).then(response => {
             console.log(response);
-            localStorage.setItem("chat-user", response.data)
+            localStorage.setItem("token", response.data.token)
             navigation('/')
             e.reset()
         }).catch((error) => {
