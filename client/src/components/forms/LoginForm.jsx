@@ -12,7 +12,7 @@ const LoginForm = () => {
     const navigation = useNavigate()
     const { setUser } = useAuthContext();
 
-    const onLogin = (e) => {
+    const onLogin = async (e) => {
         e.preventDefault()
 
         const data = {
@@ -21,9 +21,10 @@ const LoginForm = () => {
             email,
             password
         }
-        axios.post('http://localhost:3000/api/auth/login', data).then(response => {
+        axios.post('http://localhost:5000/api/auth/login', data).then(async response => {
             localStorage.setItem("token", response.data.token)
-            setUser(response.data.token)
+            localStorage.setItem("chat-user", response.data);
+            setUser(response.data)
             navigation('/')
             console.log(response);
         }).catch((error) => {

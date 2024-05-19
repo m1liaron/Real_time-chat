@@ -1,6 +1,17 @@
+import {useAuthContext} from "../../context/AuthContext.jsx";
+
 const Message = ({message}) => {
+    const {user} = useAuthContext()
+
+    const fromMe = message.senderId === user._id;
+    const chatClassName = fromMe ? "chat-end" : "chat-start";
+
+    console.log(user)
+
     return (
-            <div className="chat chat-start">
+            <div
+                className={`chat ${chatClassName}`}
+            >
                 <div className="chat-image avatar">
                     {/*<div className="w-10 rounded-full">*/}
                     {/*    <img alt="Tailwind CSS chat bubble component"*/}

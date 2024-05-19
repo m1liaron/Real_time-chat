@@ -10,7 +10,7 @@ const useGetConversations = () => {
         const getConversations = async () => {
             setLoading(true);
             try {
-                const res = await axios.get("http://localhost:3000/api/users", {
+                const res = await axios.get("http://localhost:5000/api/users", {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

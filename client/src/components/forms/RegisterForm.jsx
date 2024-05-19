@@ -23,7 +23,7 @@ const RegisterForm = () => {
         axios.post('http://localhost:3000/api/auth/register', data).then(response => {
             console.log(response);
             localStorage.setItem("token", response.data.token)
-            setUser(response.data.token)
+            setUser(response.data)
             navigation('/')
             e.reset()
         }).catch((error) => {

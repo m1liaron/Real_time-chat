@@ -23,7 +23,14 @@ const register = async (req, res) => {
         const user = await User.create(userData);
         const token = user.createJWT();
 
-        res.status(StatusCodes.CREATED).json({user: {name: user.name, profile_picture: user.profile_picture}, token});
+        res.status(StatusCodes.CREATED).json({
+            user: {
+                _id: user._id,
+                name: user.name,
+                profile_picture: user.profile_picture
+            },
+            token
+        });
     } catch (error) {
         console.error('Error registering user:', error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({error:'Register failed. Please try again'});
@@ -48,8 +55,8 @@ const login = async (req, res) => {
         }
 
         const token = user.createJWT();
-        const {name, username, profile_picture} = user
-        res.status(StatusCodes.CREATED).json({user:{name,username, email: user.email, profile_picture}, token});
+        const {_id, name, username, profile_picture} = user
+        res.status(StatusCodes.CREATED).json({user:{_id, name,username, email: user.email, profile_picture}, token});
     } catch(error){
         console.error('Error logging in user:', error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ error: 'Login failed. Please try again later.' });
