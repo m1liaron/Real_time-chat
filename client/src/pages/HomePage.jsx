@@ -1,11 +1,13 @@
 import Sidebar from "../components/sidebar/Sidebar.jsx";
+import MessageContainer from "../components/message/MessageContainer.jsx";
 
 const HomePage = () => {
     return (
         <div
-            className="bg-cover bg-center h-screen"
-            style={{backgroundImage: 'url(https://i.pinimg.com/originals/71/95/2a/71952a761bae90c7b264c2ba27ba7ad9.jpg)'}}
-        ></div>
+            className='flex h-screen rounded-lg overflow-hidden bg-gray-400 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-0'>
+            <Sidebar/>
+            <MessageContainer/>
+        </div>
     );
 };
 

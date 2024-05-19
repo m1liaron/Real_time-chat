@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import {NavLink, useNavigate} from "react-router-dom";
+import {useAuthContext} from "../../context/AuthContext.jsx";
 
 const RegisterForm = () => {
     const [name, setName] = useState('');
@@ -9,6 +10,8 @@ const RegisterForm = () => {
     const [password, setPassword] = useState('');
 
     const navigation = useNavigate()
+    const { setUser } = useAuthContext();
+
     const onRegister = (e) => {
         e.preventDefault();  // Prevent page refresh on form submit
         const data = {
@@ -20,6 +23,7 @@ const RegisterForm = () => {
         axios.post('http://localhost:3000/api/auth/register', data).then(response => {
             console.log(response);
             localStorage.setItem("token", response.data.token)
+            setUser(response.data.token)
             navigation('/')
             e.reset()
         }).catch((error) => {

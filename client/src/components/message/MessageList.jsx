@@ -1,18 +1,37 @@
 import Message from "./Message.jsx";
-import MessageInput from "./MessageInput.jsx";
 import useGetMessages from "../../hooks/useGetMessages.js";
+import {useEffect, useRef} from "react";
 
-const MessageList = ({id}) => {
-    const {data, loading, error} = useGetMessages(id)
+const MessageList = () => {
+    const {messages, loading} = useGetMessages()
 
-    // console.log(data)
+    const lastMessageRef = useRef();
+
+    useEffect(() => {
+        if (messages.length) {
+            lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [messages]);
 
     return (
         <div>
-            <Message/>
-            <div className="mt-auto"> {/* Ensures MessageInput sticks to the bottom */}
-                <MessageInput/>
-            </div>
+            {loading ? (
+                <span className='loading loading-spinner mx-auto'></span>
+            ) : messages.length ? (
+                <div>
+                    {messages.map((message, idx) => (
+                        message && message._id ? (
+                            <div key={message._id} ref={idx === messages.length - 1 ? lastMessageRef : null}>
+                                <Message
+                                    message={message}
+                                />
+                            </div>
+                        ) : null
+                    ))}
+                </div>
+            ) : (
+                <div>No messages available</div>
+            )}
         </div>
     );
 };

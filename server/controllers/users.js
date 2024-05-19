@@ -2,7 +2,7 @@ const User = require("../models/User");
 
 const getUsers = async (req, res) => {
     try {
-        const loggedInUserId = req.user._id;
+        const loggedInUserId = req.user.userId;
 
         const filteredUsers = await User.find({ _id: { $ne: loggedInUserId } }).select("-password");
 

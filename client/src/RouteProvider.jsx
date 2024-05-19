@@ -2,29 +2,18 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import HomePage from "./pages/HomePage.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
-import ConversationPage from "./pages/ConversationPage.jsx";
-import App from "./App.jsx";
+import {useAuthContext} from "./context/AuthContext.jsx";
 
-function AppEntryPoint(){
-    return (
-        <App/>
-    )
+const HomePoint = () => {
+    const { user } = useAuthContext();
+
+    return user ? <HomePage /> : <LoginPage />;
 }
 
 const router = createBrowserRouter([
     {
         path:'/',
-        element: <AppEntryPoint/>,
-        children:[
-            {
-                path:'/',
-                element:<HomePage/>,
-            },
-            {
-                path:'/conversation/:id',
-                element:<ConversationPage/>
-            },
-        ]
+        element: <HomePoint/>,
     },
     {
         path:'/login',
@@ -36,8 +25,8 @@ const router = createBrowserRouter([
     },
 ])
 
-function Provider() {
+function RouteProvider() {
   return <RouterProvider router={router}/>
 }
 
-export default Provider
+export default RouteProvider

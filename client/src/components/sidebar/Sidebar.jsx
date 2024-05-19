@@ -1,8 +1,14 @@
-import React from 'react';
 import Conversations from "./Conversations.jsx";
-import Message from "../message/Message.jsx";
+import {useAuthContext} from "../../context/AuthContext.jsx";
 
 const Sidebar = () => {
+    const { setUser } = useAuthContext();
+
+    const logout = () => {
+        localStorage.removeItem('token')
+        setUser(null)
+    }
+
     return (
         <div className='p-9'>
             <div>
@@ -17,6 +23,9 @@ const Sidebar = () => {
                 </label>
             </div>
             <Conversations/>
+            <button onClick={logout}>
+                log out
+            </button>
         </div>
     );
 };

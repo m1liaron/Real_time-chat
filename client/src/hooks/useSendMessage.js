@@ -11,8 +11,10 @@ const useSendMessage = () => {
     const sendMessage = async (message) => {
         setLoading(true);
         try {
-            const res  = axios.post(`/api/messages/send/${selectedConversation._id}`, {message}, {
-                header:token
+            const res  = axios.post(`http://localhost:3000/api/messages/send/${selectedConversation._id}`, {message}, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
             setMessages([...messages, res.data]);
         } catch (error) {

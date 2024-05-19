@@ -1,6 +1,7 @@
 import axios from "axios";
 import {useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
+import {useAuthContext} from "../../context/AuthContext.jsx";
 
 const LoginForm = () => {
     const [name, setName] = useState('');
@@ -9,6 +10,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
 
     const navigation = useNavigate()
+    const { setUser } = useAuthContext();
 
     const onLogin = (e) => {
         e.preventDefault()
@@ -21,6 +23,7 @@ const LoginForm = () => {
         }
         axios.post('http://localhost:3000/api/auth/login', data).then(response => {
             localStorage.setItem("token", response.data.token)
+            setUser(response.data.token)
             navigation('/')
             console.log(response);
         }).catch((error) => {

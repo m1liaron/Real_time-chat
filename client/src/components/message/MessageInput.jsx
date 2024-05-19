@@ -4,7 +4,6 @@ import {useState} from "react";
 const MessageInput = () => {
     const [message, setMessage] = useState('');
 
-
     const { loading, sendMessage } = useSendMessage();
 
     const handleSubmit = async (e) => {
@@ -25,9 +24,9 @@ const MessageInput = () => {
                     value={message}
                     onChange={e => setMessage(e.target.value)}
                 />
-                <button type='submit' className='absolute inset-y-0 end-0 flex items-center pe-3'>
-                    Write message
-                </button>
+                    <button type='submit' className='absolute inset-y-0 end-0 flex items-center pe-3'>
+                        {loading ? <div className='loading loading-spinner'></div> : <span>send</span>}
+                    </button>
             </div>
         </form>
     );
