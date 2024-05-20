@@ -1,15 +1,19 @@
 import {useSocketContext} from "../../context/SocketContext.jsx";
 import useConversation from "../../zustand/useConversation.js";
+import {useEffect} from "react";
+import {NavLink} from "react-router-dom";
 
 const Conversation = ({conversation}) => {
-    const { setSelectedConversation} = useConversation();
+    const { selectedConversation, setSelectedConversation } = useConversation();
     const {onlineUsers} = useSocketContext();
-    const isOnline = onlineUsers.includes(conversation.id)
+    const isOnline = onlineUsers.includes(conversation._id)
+    const isSelected = selectedConversation?._id === conversation._id;
 
     return (
         <>
-            <div
-                className={`flex gap-2 items-center hover:bg-sky-500 rounded p-2 py-1 cursor-pointer}
+            <NavLink
+                className={`flex gap-2 items-center hover:bg-sky-600 rounded p-2 py-1 cursor-pointer
+				${isSelected ? "bg-sky-500" : ""}
 			`}
                 onClick={() => setSelectedConversation(conversation)}
             >
@@ -24,7 +28,7 @@ const Conversation = ({conversation}) => {
                         <p className='font-bold text-gray-200'>{conversation.username}</p>
                     </div>
                 </div>
-            </div>
+            </NavLink>
 
         </>
     );

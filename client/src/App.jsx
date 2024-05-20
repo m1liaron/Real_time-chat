@@ -22,11 +22,11 @@ const router = createBrowserRouter([
     {
         path:'/register',
         element:<RegisterPage/>
-    },
+    }
 ])
 
-function RouteProvider() {
+function App() {
   return <RouterProvider router={router}/>
 }
 
-export default RouteProvider
+export default App

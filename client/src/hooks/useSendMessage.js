@@ -11,9 +11,10 @@ const useSendMessage = () => {
     const sendMessage = async (message) => {
         setLoading(true);
         try {
-           axios.post(`http://localhost:3000/api/messages/send/${selectedConversation._id}`, {message}, {
+            axios.post(`http://localhost:3000/api/messages/send/${selectedConversation._id}`, {message}, {
                 headers: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
                 }
             }).then((response) => {
                 console.log(response.data)
@@ -30,3 +31,5 @@ const useSendMessage = () => {
     return {loading, sendMessage };
 };
 export default useSendMessage;
+
+// http://localhost:3000

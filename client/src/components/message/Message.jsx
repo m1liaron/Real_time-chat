@@ -1,32 +1,26 @@
 import {useAuthContext} from "../../context/AuthContext.jsx";
+import useConversation from "../../zustand/useConversation.js";
 
 const Message = ({message}) => {
     const {user} = useAuthContext()
+    const {selectedConversation} = useConversation()
 
     const fromMe = message.senderId === user._id;
     const chatClassName = fromMe ? "chat-end" : "chat-start";
-
-    console.log(user)
+    const profilePic = fromMe ? user.profile_picture : selectedConversation?.profile_picture;
+    // console.log(user)
 
     return (
-            <div
-                className={`chat ${chatClassName}`}
-            >
-                <div className="chat-image avatar">
-                    {/*<div className="w-10 rounded-full">*/}
-                    {/*    <img alt="Tailwind CSS chat bubble component"*/}
-                    {/*         src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"/>*/}
-                    {/*</div>*/}
+        <div className={`chat ${chatClassName}`}>
+            <div className='chat-image avatar'>
+                <div className='w-10 rounded-full'>
+                    <img alt='Tailwind CSS chat bubble component' src={profilePic}/>
                 </div>
-                {/*<div className="chat-header">*/}
-                {/*    Obi-Wan Kenobi*/}
-                {/*    <time className="text-xs opacity-50">12:45</time>*/}
-                {/*</div>*/}
-                <div className="chat-bubble">{message.message}</div>
-                {/*<div className="chat-footer opacity-50">*/}
-                {/*    Delivered*/}
-                {/*</div>*/}
             </div>
+            <div className="chat-bubble" style={{maxWidth: "70%", wordWrap: "break-word"}}>
+                <p style={{overflowWrap: "break-word", wordWrap: "break-word" }}>{message.message}</p>
+            </div>
+        </div>
     );
 };
 

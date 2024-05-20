@@ -1,6 +1,7 @@
 const { StatusCodes } = require('http-status-codes');
 const Message = require('../models/Message');
 const Conversation = require('../models/Conversation');
+const {getReceiverSocketId, io} = require("../socket/socket");
 
 const sendMessage = async (req, res) => {
     try{
@@ -29,6 +30,11 @@ const sendMessage = async (req, res) => {
         }
 
         await Promise.all([conversation.save(), newMessage.save()]);
+
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId) {
+            io.to(receiverSocketId).emit("newMessage", newMessage);
+        }
 
         res.status(StatusCodes.CREATED).json(newMessage);
     } catch (error){
