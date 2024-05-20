@@ -2,6 +2,7 @@ import axios from "axios";
 import {useState} from "react";
 import {NavLink, useNavigate} from "react-router-dom";
 import {useAuthContext} from "../../context/AuthContext.jsx";
+import toast from "react-hot-toast";
 
 const LoginForm = () => {
     const [name, setName] = useState('');
@@ -21,13 +22,14 @@ const LoginForm = () => {
             email,
             password
         }
-        axios.post('https://real-time-chat-rlprhdgz9-vlads-projects-d23fb6e2.vercel.app/api/auth/login', data).then(async response => {
+        axios.post('https://real-time-chat-blue.vercel.app/api/auth/login', data).then(async response => {
             localStorage.setItem("token", response.data.token)
             localStorage.setItem("chat-user", JSON.stringify(response.data.user));
             setUser(response.data)
             navigation('/')
             console.log(response);
         }).catch((error) => {
+            toast.error(error.message)
             console.log(error);
         })
     }
