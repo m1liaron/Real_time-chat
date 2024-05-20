@@ -21,7 +21,7 @@ const LoginForm = () => {
             email,
             password
         }
-        axios.post('http://localhost:3000/api/auth/login', data).then(async response => {
+        axios.post('https://real-time-chat-blue.vercel.app/api/auth/login', data).then(async response => {
             localStorage.setItem("token", response.data.token)
             localStorage.setItem("chat-user", JSON.stringify(response.data.user));
             setUser(response.data)

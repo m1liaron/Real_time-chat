@@ -20,7 +20,7 @@ const RegisterForm = () => {
             email,
             password
         }
-        axios.post('http://localhost:3000/api/auth/register', data).then(response => {
+        axios.post('https://real-time-chat-blue.vercel.app/api/auth/register', data).then(response => {
             console.log(response);
             localStorage.setItem("token", response.data.token)
             setUser(response.data)
