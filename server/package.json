@@ -2,10 +2,10 @@
   "name": "events-registration",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "api/index.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node api/index.js",
+    "dev": "nodemon api/index.js"
   },
   "dependencies": {
     "axios": "^1.6.8",
@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.3.4",
     "nodemon": "^3.1.0",
+    "path": "^0.12.7",
     "socket.io": "^4.7.5"
   }
 }

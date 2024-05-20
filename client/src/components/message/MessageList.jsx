@@ -10,7 +10,7 @@ const MessageList = () => {
 
     useEffect(() => {
         if (messages.length) {
-            lastMessageRef.current?.scrollIntoView();
+            lastMessageRef.current?.scrollIntoView({behavior:'smooth'});
         }
     }, [messages]);
 

@@ -1,14 +1,14 @@
 require('dotenv').config()
 const express = require('express');
-const {app, server} = require('./socket/socket');
+const {app, server} = require('../socket/socket');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 // routes import
-const authRouter = require('./routes/authRouter');
-const messageRouter = require('./routes/messageRouter');
-const userRouter = require('./routes/userRoutes');
+const authRouter = require('../routes/authRouter');
+const messageRouter = require('../routes/messageRouter');
+const userRouter = require('../routes/userRoutes');
 
-const connectDB = require('./db/connect')
+const connectDB = require('../db/connect')
 const port = process.env.PORT || 5000;
 
 app.use(express.json());

@@ -7,10 +7,10 @@ import { FaArrowLeft } from "react-icons/fa";
 const MessageContainer = () => {
     const { selectedConversation, setSelectedConversation } = useConversation();
 
-    // useEffect(() => {
-    //     // cleanup function (unmounts)
-    //     return () => setSelectedConversation(null);
-    // }, [setSelectedConversation]);
+    useEffect(() => {
+        // cleanup function (unmounts)
+        return () => setSelectedConversation(null);
+    }, [setSelectedConversation]);
 
     return (
         <div className='flex-1 flex flex-col'>
@@ -22,7 +22,6 @@ const MessageContainer = () => {
             ) : (
                 <>
                     <div className='flex items-center gap-3 p-5'>
-                        <FaArrowLeft size={35} onClick={() => setSelectedConversation(null)}/>
                         <div className="w-16 h-16 rounded-full overflow-hidden">
                             <img src={selectedConversation.profile_picture} alt={selectedConversation.name}
                                  className="w-full h-full object-cover"/>
