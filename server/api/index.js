@@ -1,24 +1,30 @@
 require('dotenv').config()
 const express = require('express');
+const path = require('path');
 const {app, server} = require('../socket/socket');
 const cors = require('cors');
-const cookieParser = require('cookie-parser');
 // routes import
 const authRouter = require('../routes/authRouter');
 const messageRouter = require('../routes/messageRouter');
 const userRouter = require('../routes/userRoutes');
 
 const connectDB = require('../db/connect')
-const port = process.env.PORT || 5000;
+const port = 5000;
 
 app.use(express.json());
-app.use(cookieParser())
 app.use(cors());
 
 // Routes
 app.use('/api/auth', authRouter)
 app.use('/api/messages', messageRouter)
 app.use('/api/users', userRouter)
+
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+});
+
 
 const start = async () => {
     try {
@@ -32,3 +38,4 @@ const start = async () => {
 };
 
 start();
+module.exports = app;

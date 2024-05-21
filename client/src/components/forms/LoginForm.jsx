@@ -22,7 +22,7 @@ const LoginForm = () => {
             email,
             password
         }
-        axios.post('https://real-time-chat-jolxz2tjp-vlads-projects-d23fb6e2.vercel.app/api/auth/login', data).then(async response => {
+        axios.post('/api/auth/login', data).then(async response => {
             localStorage.setItem("token", response.data.token)
             localStorage.setItem("chat-user", JSON.stringify(response.data.user));
             setUser(response.data)
