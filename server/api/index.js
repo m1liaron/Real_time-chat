@@ -19,6 +19,8 @@ app.use('/api/auth', authRouter)
 app.use('/api/messages', messageRouter)
 app.use('/api/users', userRouter);
 
+
+__dirname = path.resolve();
 app.use(express.static(path.join(__dirname, "/client/dist")));
 
 app.get("*", (req, res) => {
