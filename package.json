@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon server/api/index.js",
+    "start": "node server/api/index.js",
     "build": "npm install && npm install --prefix client && npm run build --prefix client"
   },
   "keywords": [],
