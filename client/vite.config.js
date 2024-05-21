@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "https://server-n9cmlldp4-vlads-projects-d23fb6e2.vercel.app",
+        target: "https://real-time-chat-five-eta.vercel.app",
       },
     },
   },
