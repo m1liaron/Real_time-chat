@@ -12,7 +12,7 @@ const useSendMessage = () => {
     const sendMessage = async (message) => {
         setLoading(true);
         try {
-            axios.post(`https://real-time-chat-blue.vercel.app/api/messages/send/${selectedConversation._id}`, {message}, {
+            axios.post(`https://real-time-chat-jolxz2tjp-vlads-projects-d23fb6e2.vercel.app/api/messages/send/${selectedConversation._id}`, {message}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                     "Content-Type": "application/json",

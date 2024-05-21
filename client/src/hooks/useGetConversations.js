@@ -11,7 +11,7 @@ const useGetConversations = () => {
         const getConversations = async () => {
             setLoading(true);
             try {
-                const res = await axios.get("https://real-time-chat-blue.vercel.app/api/users", {
+                const res = await axios.get("https://real-time-chat-jolxz2tjp-vlads-projects-d23fb6e2.vercel.app/api/users", {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
